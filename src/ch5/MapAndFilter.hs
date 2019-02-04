@@ -37,5 +37,6 @@ showLongChains = filter isLong (map chain [1..100])
 
 numLongChains2 norm =  length (filter (\xs -> length xs > norm) (map chain [1..100]))
 
-showLongChains2 norm = filter (\xs -> (length (snd xs)) > norm) (map (\a -> (a,chain a)) [1..100])
+-- showLongChains2 norm = filter (\xs -> (length (snd xs)) > norm) (map (\a -> (a,chain a)) [1..100])
+showLongChains2 norm = filter (\xs -> (length $ snd xs) > norm) (map (\a -> (a,chain a)) [1..100])
 
