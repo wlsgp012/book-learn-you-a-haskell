@@ -23,7 +23,8 @@ treeInsert x (Node a left right)
  | x < a = Node a (treeInsert x left) right
  | x > a = Node a left (treeInsert x right)
 
-treeInsert2 a b = flip treeInsert a b
+treeInsert2 :: (Ord a) => Tree a -> a -> Tree a
+treeInsert2 = flip treeInsert
 
 treeElem :: (Ord a) => a -> Tree a -> Bool
 treeElem x EmptyTree = False
