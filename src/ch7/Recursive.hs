@@ -1,5 +1,6 @@
 module Recursive where
 
+import qualified Data.Foldable as F
 -- data List a = Empty | Cons a (List a) deriving (Show, Read, Eq, Ord)
 -- data List a = Empty | Cons {listHead :: a, listTail:: List a} deriving (Show, Read, Eq, Ord)
 
@@ -34,5 +35,20 @@ treeElem x (Node a left right)
  | x > a = treeElem x right
 
 instance Functor Tree where
- fmap f EmptyTree = EmptyTree
+ fmap f EmptyTree           = EmptyTree
  fmap f (Node x left right) = Node (f x) (fmap f left) (fmap f right)
+
+instance F.Foldable Tree where
+ foldMap f EmptyTree = mempty
+ foldMap f (Node x l r) = F.foldMap f l `mappend`
+                          f x `mappend`
+                          F.foldMap f r
+testTree = Node 5
+            (Node 3
+                (Node 1 EmptyTree EmptyTree)
+                (Node 6 EmptyTree EmptyTree)
+            )
+            (Node 9
+                (Node 8 EmptyTree EmptyTree)
+                (Node 10 EmptyTree EmptyTree)
+            )
