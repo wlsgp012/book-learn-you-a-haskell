@@ -1,5 +1,7 @@
 module Pierr where
 
+import Control.Monad hiding (guard)
+
 type Birds = Int
 type Pole = (Birds, Birds)
 
@@ -42,4 +44,23 @@ routine = do
 wopwop :: Maybe Char
 wopwop = do
  (x:xs) <- Just ""
+ return x
+
+-- [1,2] >>= \n -> ['a','b'] >>= \ch -> return (n, ch)
+listOfTuples :: [(Int, Char)]
+listOfTuples = do
+ n <- [1,2]
+ ch <- ['a', 'b']
+ return (n, ch)
+
+guard :: (MonadPlus m) => Bool -> m ()
+guard True = return ()
+guard False = mzero
+
+-- [1..50] >>= (\x -> guard ('7' `elem` show x) >> return x)
+
+sevensOnly :: [Int]
+sevensOnly = do
+ x <- [1..50]
+ guard ('7' `elem` show x)
  return x
