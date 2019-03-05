@@ -29,9 +29,8 @@ gcdReverse a b
 
 newtype DiffList a = DiffList { getDiffList :: [a] -> [a] }
 
--- instance Semigroup (DiffList a) where
---  (<>) = (++)
---  DiffList x <> DiffList y = DiffList (\x y -> x ++ y)
+instance Semigroup (DiffList a) where
+ DiffList x <> DiffList y = DiffList (x . y)
 
 instance Monoid (DiffList a) where
     mempty = DiffList (\xs -> [] ++ xs)
