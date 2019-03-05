@@ -31,10 +31,11 @@ newtype DiffList a = DiffList { getDiffList :: [a] -> [a] }
 
 instance Semigroup (DiffList a) where
  DiffList x <> DiffList y = DiffList (x . y)
+--  (DiffList f) <> (DiffList g) = DiffList (\xs -> f (g xs))
 
 instance Monoid (DiffList a) where
     mempty = DiffList (\xs -> [] ++ xs)
-    (DiffList f) `mappend` (DiffList g) = DiffList (\xs -> f (g xs))
+--     (DiffList f) `mappend` (DiffList g) = DiffList (\xs -> f (g xs))
 
 toDiffList :: [a] -> DiffList a
 toDiffList xs = DiffList (xs++)
