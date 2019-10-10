@@ -7,7 +7,7 @@ sum' = foldl (+) 0
 
 elem' :: (Eq a) => a -> [a] -> Bool
 -- elem' y ys = foldl (\acc x -> if x==y then True else acc) False ys
-elem' y = foldl (\acc x -> if x==y then True else acc) False
+elem' y = foldl (\acc x -> if x == y then True else acc) False
 
 map' :: (a -> b) -> [a] -> [b]
 map' f xs = foldr (\x acc -> f x : acc) [] xs
@@ -25,6 +25,7 @@ reverse' = foldl (flip (:)) []
 product' :: (Num a) => [a] -> a
 -- product' = foldr (\x acc -> x * acc) 1
 -- product' = foldl (\acc x -> acc * x) 1
+-- product' = foldr (*) 1
 product' = foldr1 (*)
 
 filter' :: (a -> Bool) -> [a] -> [a]
@@ -35,3 +36,10 @@ head' = foldr1 (\x _ -> x)
 
 last' :: [a] -> a
 last' = foldl1 (\_ x -> x)
+
+and' :: [Bool] -> Bool
+-- and' xs = foldl (&&) True xs
+and' xs = foldr (&&) True xs
+
+sqrtSums :: Int
+sqrtSums = length (takeWhile (< 1000) (scanl1 (+) (map sqrt [1 ..]))) + 1

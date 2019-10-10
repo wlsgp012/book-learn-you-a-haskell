@@ -1,14 +1,14 @@
 module DataList where
 
-import Data.List
+import           Data.List
 
 sperse = intersperse '.' "MONKEY"
 
-calate = intercalate [0,0] [[1,2,3],[4,5,6],[7,8,9]]
+calate = intercalate [0, 0] [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
-trans = transpose [[1,2,3], [4,5,6], [7,8,9]]
+trans = transpose [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
-con = concat [[1,2,3],[4,5,6]]
+con = concat [[1, 2, 3], [4, 5, 6]]
 
 concatMap (replicate 4) [1..3]
 
@@ -41,8 +41,10 @@ let w = "w00t" in zip (inits w) (tails w)
 -- isInfixOf
 search :: (Eq a) => [a] -> [a] -> Bool
 search needle haystack =
- let nlen = length needle
- in fold1 (\acc x -> if take nlen x == needle then True else acc) False (tails haystack)
+  let nlen = length needle
+  in  fold1 (\acc x -> if take nlen x == needle then True else acc)
+            False
+            (tails haystack)
 
 find (>4) [1..10]
 
